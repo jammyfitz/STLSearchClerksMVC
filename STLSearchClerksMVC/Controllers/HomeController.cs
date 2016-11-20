@@ -1,4 +1,6 @@
-﻿using System;
+﻿using STLSearchClerksMVC.Models;
+using STLSearchClerksMVC.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,50 @@ namespace STLSearchClerksMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private IUnitOfWork _unitOfWork;
+
+        public HomeController()
+        {
+            _unitOfWork = new UnitOfWork();
+        }
+
+        public HomeController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.DoubleBookings = GetDoubleBookingsFromLastMonth();
 
             return View();
         }
 
-        public ActionResult Contact()
+        private IList<DoubleBooking> GetDoubleBookingsFromLastMonth()
         {
-            ViewBag.Message = "Your contact page.";
+            return _unitOfWork.DoubleBookingRepository.GetDoubleBookingsFromLastMonth();
+        }
 
-            return View();
+        public ActionResult CreateDoubleBooking()
+        {
+            var doubleBookingViewModel = new DoubleBookingViewModel()
+            {
+                Authorities = GetAuthorities(),
+                SearchClerks = GetSearchClerks(),
+                BookingDate = DateTime.Now
+            };
+
+            return View(doubleBookingViewModel);
+        }
+
+        private IList<SearchClerk> GetSearchClerks()
+        {
+            return _unitOfWork.SearchClerkRepository.GetSearchClerks();
+        }
+
+        private IList<Authority> GetAuthorities()
+        {
+            return _unitOfWork.AuthorityRepository.GetAuthorities();
         }
     }
 }
