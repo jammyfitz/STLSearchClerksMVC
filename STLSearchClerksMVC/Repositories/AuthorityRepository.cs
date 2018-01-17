@@ -20,7 +20,7 @@ namespace STLSearchClerksMVC.Repositories
             _stlContext = stlContext;
         }
 
-        public IList<Authority> GetAuthorities()
+        public List<Authority> GetAuthorities()
         {
             return _stlContext.Authorities.ToList();
         }

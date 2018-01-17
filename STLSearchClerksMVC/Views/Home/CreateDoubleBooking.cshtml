@@ -5,22 +5,17 @@
     //var searchClerks = ViewBag.SearchClerks;
     //var authorities = ViewBag.Authorities;
 
-    using (Html.BeginForm("InsertDoubleBooking", "DoubleBooking", FormMethod.Post))
+    using (Html.BeginForm("InsertDoubleBooking", "Home", FormMethod.Post, null))
     {
-        @Html.ValidationSummary(true);
-        <table id="tblInsertDoubleBooking">
+        @*<p>@Html.ValidationSummary(false)</p>*@
+        <table id="tblsertDoubleBooking">
             <tr>
                 <td>
                     Authority: 
                 </td>
                 <td>
-                    @*@Html.DropDownList("ddlAuthority", new SelectList(authorities, "AuthorityId", "Name"))*@
                     @Html.DropDownListFor(x => x.AuthorityId, new SelectList(Model.Authorities, "AuthorityId", "Name"), "-- Select Authority --")
-                    @Html.ValidationMessage("Authority", "*")
                     @Html.ValidationMessageFor(model => model.AuthorityId)
-
-
-                    @*@Html.EditorFor(model => model.Authority, new SelectList(authorities, "AuthorityId", "Name"))*@
                 </td>
             </tr>
             <tr>
@@ -30,9 +25,6 @@
                 <td>
                     @Html.TextBoxFor(model => model.BookingDate, new { type = "date" })
                     @Html.ValidationMessageFor(model => model.BookingDate)
-                    @*@Html.TextBoxFor(model => model.BookingDate, new { type= "date", @Value = @DateTime.Now })
-                    @Html.TextBoxFor(model => model.BookingDate, new { type = "date", @Value = @DateTime.Now.ToShortDateString() })*@
-                    @*@Html.EditorFor(model => model.BookingDate, new { type = "date" })*@
                 </td>
             </tr>
             <tr>
@@ -40,7 +32,6 @@
                     SearchClerk: 
                 </td>
                 <td>
-                    @*@Html.DropDownList("ddlSearchClerk", new SelectList(searchClerks, "SearchClerkId", "Name"))*@
                     @Html.DropDownListFor(x => x.SearchClerkId, new SelectList(Model.SearchClerks, "SearchClerkId", "Name"), "-- Select Search Clerk --")
                     @Html.ValidationMessageFor(model => model.SearchClerkId)
                 </td>

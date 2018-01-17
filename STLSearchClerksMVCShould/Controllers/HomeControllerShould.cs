@@ -42,5 +42,37 @@ namespace STLSearchClerksMVCShould.Controllers
             _unitOfWork.SearchClerkRepository.Received().GetSearchClerks();
             _unitOfWork.AuthorityRepository.Received().GetAuthorities();
         }
+
+        [Test]
+        public void SupportInsertingADoubleBooking()
+        {
+            var doubleBookingToInsert = GetTestDoubleBooking();
+            var viewModel = GetTestDoubleBookingViewModel(doubleBookingToInsert);
+
+            var result = _homeController.InsertDoubleBooking(viewModel);
+
+            _unitOfWork.DoubleBookingRepository.ReceivedWithAnyArgs().Add(null);
+            _unitOfWork.DoubleBookingRepository.Received().Save();
+        }
+
+        private static DoubleBooking GetTestDoubleBooking()
+        {
+            return new DoubleBooking()
+            {
+                AuthorityId = 2,
+                SearchClerkId = 3,
+                BookingDate = new DateTime(2001, 12, 12)
+            };
+        }
+
+        private static DoubleBookingViewModel GetTestDoubleBookingViewModel(DoubleBooking doubleBooking)
+        {
+            return new DoubleBookingViewModel()
+            {
+                AuthorityId = doubleBooking.AuthorityId,
+                SearchClerkId = doubleBooking.SearchClerkId,
+                BookingDate = doubleBooking.BookingDate
+            };
+        }
     }
 }

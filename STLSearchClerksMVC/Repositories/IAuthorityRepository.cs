@@ -8,6 +8,6 @@ namespace STLSearchClerksMVC.Repositories
 {
     public interface IAuthorityRepository
     {
-        IList<Authority> GetAuthorities();
+        List<Authority> GetAuthorities();
     }
 }

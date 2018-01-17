@@ -9,6 +9,6 @@ namespace STLSearchClerksMVC.Repositories
 {
     public interface ISearchClerkRepository
     {
-        IList<SearchClerk> GetSearchClerks();
+        List<SearchClerk> GetSearchClerks();
     }
 }

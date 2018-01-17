@@ -17,7 +17,7 @@ namespace STLSearchClerksMVC.Models
         [Required(ErrorMessage = "Authority is required")]
         public int AuthorityId { get; set; }
 
-        public IList<Authority> Authorities { get; set; }
-        public IList<SearchClerk> SearchClerks { get; set; }
+        public List<Authority> Authorities { get; set; }
+        public List<SearchClerk> SearchClerks { get; set; }
     }
 }

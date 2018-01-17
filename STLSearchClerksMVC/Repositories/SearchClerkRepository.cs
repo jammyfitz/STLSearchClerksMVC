@@ -20,7 +20,7 @@ namespace STLSearchClerksMVC.Repositories
             _stlContext = stlContext;
         }
 
-        public IList<SearchClerk> GetSearchClerks()
+        public List<SearchClerk> GetSearchClerks()
         {
             return _stlContext.SearchClerks.ToList();
         }
